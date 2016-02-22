@@ -194,7 +194,7 @@ module.exports = app;
      Server started ...
      ******************
 
-### Making the following request one after the other immediately from different browser tabs
+<b> Making the following request one after the other immediately from different browser tabs </b>
 
 http://localhost:8999/hello1
 
@@ -215,8 +215,6 @@ http://localhost:8999/hello8
 http://localhost:8999/hello9
 
 http://localhost:8999/hello10
-
-These requests are one after the other immdediately in separate tabs.
 
      Request for URL:/hello1
      Waiting for 10 minutes
@@ -253,4 +251,15 @@ These requests are one after the other immdediately in separate tabs.
      Request has been served for /hello8
      Request for URL:/hello3
      Waiting for 6 minutes
+
+### Observations
+
+Multiple requests can be made SIMULTANEOUSLY to an express app. 
+
+Is there a chance for a race condition?
+
+If processing request A updates a global variable, before it gets busy with something, then processing request B might change the value of the global variable updated for request A.
+
+Need more insight here!!
+
 
