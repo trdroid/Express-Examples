@@ -6,6 +6,10 @@
     ├── commander@2.7.1 (graceful-readlink@1.0.1)
     └── mkdirp@0.5.1 (minimist@0.0.8)
 
+> which express
+
+    /home/droid/software/node/node-v4.2.2-linux-x64/bin/express
+
 > express -h
     
       Usage: express [options] [dir]
