@@ -96,3 +96,65 @@
     ├── clean-css@3.4.9 (commander@2.8.1, source-map@0.4.4)
     ├── transformers@2.1.0 (promise@2.0.0, css@1.0.8, uglify-js@2.2.5)
     └── uglify-js@2.6.1 (async@0.2.10, uglify-to-browserify@1.0.2, source-map@0.5.3, yargs@3.10.0)
+
+
+### Changes to app.js 
+
+```javascript
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+
+var app = express();
+console.log("Server started ...");
+
+setTimeout(function() {
+  console.log("Hello World!");
+}, 60000);
+
+app.use(function(req, res, next) {  
+  console.log("Request for URL:" + req.url);
+  res.send("Hello There!");
+  console.log("Request has been served");
+});
+
+module.exports = app;
+
+```
+
+### Running the app
+
+After running the app, the following output is displayed ...
+
+     Server started ...
+     ******************
+
+After making a request in the browser for http://localhost:8999/hello1
+
+     Request for URL:/hello1
+     Request has been served for /hello1
+     Request for URL:/favicon.ico
+
+Similarly, making requests for http://localhost:8999/hello2 & http://localhost:8999/hello3 immediately results in 
+
+     Request for URL:/hello2
+     Request has been served for /hello2
+     Request for URL:/favicon.ico
+     Request has been served for /favicon.ico
+     Request for URL:/hello3
+     Request has been served for /hello3
+     Request for URL:/favicon.ico
+     Request has been served for /favicon.ico
+
+After 1 minute passes, the following line is printed in the server's console
+
+     Hello World!
+     
+     
+
