@@ -159,6 +159,8 @@ After 1 minute passes, the following line is printed in the server's console
      
 ### Snapshot
 
+<img src="_misc/setTimeout%20after%201%20minute.png"/>
+
 ### Changes to app.js
 
 ```javascript
@@ -251,6 +253,10 @@ http://localhost:8999/hello10
      Request has been served for /hello8
      Request for URL:/hello3
      Waiting for 6 minutes
+
+### Snapshot
+
+<img src="_misc/response%20in%20setTimeout.png"/>
 
 ### Observations
 
