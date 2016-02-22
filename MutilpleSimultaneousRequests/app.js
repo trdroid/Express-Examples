@@ -5,6 +5,16 @@ var app = express();
 console.log("Server started ...");
 console.log("******************");
 
+/*setTimeout(function() {
+  console.log("Hello World!");
+}, 60000);
+
+app.use(function(req, res, next) {  
+  console.log("Request for URL:" + req.url);
+  res.send("Hello There!");
+  console.log("Request has been served for " + req.url);
+});*/
+
 var counter = 10;
 
 app.use(function(req, res, next) {  
@@ -24,13 +34,3 @@ app.use(function(req, res, next) {
  });
  
 module.exports = app;
-
-/*setTimeout(function() {
-  console.log("Hello World!");
-}, 60000);
-
-app.use(function(req, res, next) {  
-  console.log("Request for URL:" + req.url);
-  res.send("Hello There!");
-  console.log("Request has been served for " + req.url);
-});*/
