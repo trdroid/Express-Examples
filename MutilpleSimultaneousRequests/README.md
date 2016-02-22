@@ -1,3 +1,11 @@
+### Purpose
+
+The purpose of this sample app is to check how an Express app behaves when multiple requests are made while some requests take a little longer to run. 
+
+Is there any chance for 
+
+### Creating the app
+
 > droid@droidserver:~/onGit/Express.js$ express MutilpleSimultaneousRequests
 
      create : MutilpleSimultaneousRequests
@@ -149,5 +157,100 @@ After 1 minute passes, the following line is printed in the server's console
 
      Hello World!
      
-     
+### Snapshot
+
+### Changes to app.js
+
+```javascript
+var express = require('express');
+
+var app = express();
+
+console.log("Server started ...");
+console.log("******************");
+
+var counter = 10;
+
+app.use(function(req, res, next) {  
+  console.log("Request for URL:" + req.url);
+  console.log("Waiting for " + counter + " minutes");
+  
+  if(counter == 0) {
+    counter = 10;  
+  } else {
+    counter--;
+  }
+    
+  setTimeout(function() {      
+      res.send("Hello World!");
+      console.log("Request has been served for " + req.url);
+   }, counter * 60 * 1000);
+ });
+ 
+module.exports = app;
+```
+### Running the app
+
+     Server started ...
+     ******************
+
+### Making the following request one after the other immediately from different browser tabs
+
+http://localhost:8999/hello1
+
+http://localhost:8999/hello2
+
+http://localhost:8999/hello3
+
+http://localhost:8999/hello4
+
+http://localhost:8999/hello5
+
+http://localhost:8999/hello6
+
+http://localhost:8999/hello7
+
+http://localhost:8999/hello8
+
+http://localhost:8999/hello9
+
+http://localhost:8999/hello10
+
+The 
+
+     Request for URL:/hello1
+     Waiting for 10 minutes
+     Request for URL:/hello2
+     Waiting for 9 minutes
+     Request for URL:/hello3
+     Waiting for 8 minutes
+     Request for URL:/hello4
+     Waiting for 7 minutes
+     Request for URL:/hello5
+     Waiting for 6 minutes          
+     Request for URL:/hello6       <--- at this request, there was a brief pause; paused until I made the 10th request, and then the following started printing to the console 
+     Waiting for 5 minutes
+     Request for URL:/hello7
+     Waiting for 4 minutes
+     Request for URL:/hello8
+     Waiting for 3 minutes
+     Request for URL:/hello9
+     Waiting for 2 minutes
+     Request for URL:/hello10
+     Waiting for 1 minutes
+     Request has been served for /hello10
+     Request for URL:/favicon.ico
+     Waiting for 0 minutes         <--- counter has decremented to 0 by now, so the 10th request is served immediately, while the others are blocked until the setTimeout time elapses 
+     Request has been served for /hello9
+     Request for URL:/favicon.ico  <--- Also a request for /favicon.ico for the 10th request has come after serving the 10th request
+     Waiting for 10 minutes    <--- The counter is set back to 10 minutes as dictated by the logic
+     Request for URL:/hello6   <--- The request for /hello6 seemed like its timedout; As soon as I touched the tab, it sent a request again, and so is the case with the requests made in the earlier tabs, as shown further
+     Waiting for 9 minutes    
+     Request for URL:/hello5
+     Waiting for 8 minutes
+     Request for URL:/hello4
+     Waiting for 7 minutes
+     Request has been served for /hello8
+     Request for URL:/hello3
+     Waiting for 6 minutes
 
