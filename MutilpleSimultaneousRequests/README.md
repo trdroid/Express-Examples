@@ -2,8 +2,6 @@
 
 The purpose of this sample app is to check how an Express app behaves when multiple requests are made while some requests take a little longer to run. 
 
-Is there any chance for 
-
 ### Creating the app
 
 > droid@droidserver:~/onGit/Express.js$ express MutilpleSimultaneousRequests
